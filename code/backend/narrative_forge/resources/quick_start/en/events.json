@@ -1,0 +1,83 @@
+{
+  "state_variables": [
+    {
+      "id": "var-path",
+      "name": "Chosen path",
+      "type": "enum",
+      "allowed": [
+        "undecided",
+        "meadow",
+        "woods"
+      ],
+      "initial": "undecided",
+      "description": "The walker’s choice at the fork. Written in the scene, read by event edges, used to decide which later path is open.",
+      "value_descriptions": {
+        "undecided": "Has not chosen a side yet",
+        "meadow": "Already chose the meadow",
+        "woods": "Already chose the woods"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ev-fork",
+      "title": "The Fork",
+      "summary": "The walker must decide which way to go.",
+      "type": "mainline",
+      "characters": [
+        "char-walker"
+      ],
+      "locations": [
+        "loc-fork"
+      ]
+    },
+    {
+      "id": "ev-meadow",
+      "title": "End of the Meadow",
+      "summary": "After going left, the walker reaches the open meadow.",
+      "type": "ending",
+      "characters": [
+        "char-walker"
+      ],
+      "locations": [
+        "loc-meadow"
+      ]
+    },
+    {
+      "id": "ev-woods",
+      "title": "Rest in the Woods",
+      "summary": "After going right, the walker reaches the shaded path.",
+      "type": "ending",
+      "characters": [
+        "char-walker"
+      ],
+      "locations": [
+        "loc-woods"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-to-meadow",
+      "source": "ev-fork",
+      "target": "ev-meadow",
+      "label": "Left, toward the meadow",
+      "condition": {
+        "var": "var-path",
+        "op": "==",
+        "value": "meadow"
+      }
+    },
+    {
+      "id": "edge-to-woods",
+      "source": "ev-fork",
+      "target": "ev-woods",
+      "label": "Right, into the woods",
+      "condition": {
+        "var": "var-path",
+        "op": "==",
+        "value": "woods"
+      }
+    }
+  ]
+}

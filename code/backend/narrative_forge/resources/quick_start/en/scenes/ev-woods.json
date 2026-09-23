@@ -1,0 +1,14 @@
+{
+  "event_id": "ev-woods",
+  "beats": [
+    {
+      "id": "beat-woods",
+      "kind": "narration",
+      "speaker": "",
+      "content": "The woods are cool. The walker follows the shade and hears a stream far off.",
+      "location": "loc-woods",
+      "effects": []
+    }
+  ],
+  "edges": []
+}

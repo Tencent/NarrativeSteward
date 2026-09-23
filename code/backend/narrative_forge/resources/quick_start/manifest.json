@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "locales": {
+    "zh-CN": {
+      "project_id": "_builtin_quick_start_zh",
+      "name": "快速上手演示",
+      "dirname": "zh"
+    },
+    "en-US": {
+      "project_id": "_builtin_quick_start_en",
+      "name": "Quick Start Demo",
+      "dirname": "en"
+    }
+  }
+}

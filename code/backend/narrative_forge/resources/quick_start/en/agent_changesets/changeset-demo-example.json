@@ -1,0 +1,45 @@
+{
+  "id": "changeset-demo-example",
+  "project_id": "_builtin_quick_start_en",
+  "turn_id": "turn-demo-example",
+  "status": "pending",
+  "created_at": "2026-01-01T00:00:00+00:00",
+  "resolved_at": null,
+  "resolution": null,
+  "fragments": [
+    {
+      "key": "scene:ev-fork",
+      "data_type": "scene",
+      "event_id": "ev-fork",
+      "input_revision": 0,
+      "output_revision": 1,
+      "before": null,
+      "after": null,
+      "details": [
+        {
+          "path": "scene.beats[beat-choose].content",
+          "data_type": "scene",
+          "object_type": "beat",
+          "object_id": "beat-choose",
+          "field": "content",
+          "operation": "modify",
+          "before": "Which way?",
+          "after": "Which way will you go?",
+          "location": {
+            "board": "events",
+            "subtab": "content",
+            "event_id": "ev-fork",
+            "object_type": "beat",
+            "object_id": "beat-choose"
+          }
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "total": 1,
+    "scene": 1,
+    "modify": 1
+  },
+  "reverted_revisions": {}
+}

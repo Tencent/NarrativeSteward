@@ -1,0 +1,47 @@
+{
+  "name": "narrativesteward-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "type": "module",
+  "description": "NarrativeSteward 互动叙事创作工作空间前端",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check:api-contract": "node tests/api_contract_check.mjs",
+    "check:onboarding": "node tests/quick_start_check.mjs",
+    "check:concept-help": "node tests/concept_help_check.mjs",
+    "check:quickstart-return": "node tests/quick_start_return_check.mjs",
+    "check:execution-trace": "node tests/execution_trace_check.mjs",
+    "check:agent-stop": "node tests/agent_stop_check.mjs",
+    "check:project-refresh": "node tests/project_refresh_check.mjs",
+    "check:event-network-recovery": "node tests/event_network_recovery_check.mjs",
+    "check:graph-continuity": "node tests/graph_continuity_check.mjs",
+    "check:scene-network-recovery": "node tests/scene_network_recovery_check.mjs",
+    "check:world-card-references": "node tests/world_card_references_check.mjs",
+    "check:playtest-visuals": "node tests/playtest_visuals_check.mjs",
+    "check:playtest-session": "node tests/playtest_session_check.mjs",
+    "check:playtest-context": "node tests/playtest_context_check.mjs",
+    "check:asset-operation": "node tests/asset_operation_check.mjs",
+    "check:locale": "node tests/locale_check.mjs",
+    "check:chat-input-autogrow": "node tests/chat_input_autogrow_check.mjs",
+    "check:chat-panel-resize": "node tests/chat_panel_resize_check.mjs",
+    "check:branding": "node tests/branding_check.mjs",
+    "check": "node tests/agent_stop_check.mjs && node tests/api_contract_check.mjs && node tests/asset_operation_check.mjs && node tests/branding_check.mjs && node tests/change_presentation_check.mjs && node tests/chat_input_autogrow_check.mjs && node tests/chat_panel_resize_check.mjs && node tests/concept_help_check.mjs && node tests/event_network_recovery_check.mjs && node tests/execution_trace_check.mjs && node tests/graph_continuity_check.mjs && node tests/locale_check.mjs && node tests/playtest_context_check.mjs && node tests/playtest_session_check.mjs && node tests/playtest_visuals_check.mjs && node tests/project_refresh_check.mjs && node tests/quick_start_check.mjs && node tests/quick_start_return_check.mjs && node tests/scene_network_recovery_check.mjs && node tests/world_card_references_check.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.11.2",
+    "dagre": "^0.8.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0"
+  }
+}

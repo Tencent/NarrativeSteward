@@ -1,0 +1,14 @@
+{
+  "event_id": "ev-woods",
+  "beats": [
+    {
+      "id": "beat-woods",
+      "kind": "narration",
+      "speaker": "",
+      "content": "林间很凉快。行路人顺着树荫继续往前，听见远处有溪水。",
+      "location": "loc-woods",
+      "effects": []
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,56 @@
+{
+  "worldview": [
+    {
+      "id": "world-demo-road",
+      "name": "Country road",
+      "description": "A quiet dirt road that splits in two after noon.",
+      "tags": [
+        "demo"
+      ],
+      "image": ""
+    }
+  ],
+  "characters": [
+    {
+      "id": "char-walker",
+      "name": "Walker",
+      "description": "A traveler passing through.",
+      "tags": [
+        "demo"
+      ],
+      "image": "assets/char-walker.png"
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc-fork",
+      "name": "The fork",
+      "description": "The dirt road splits here toward meadow and woods.",
+      "tags": [
+        "demo"
+      ],
+      "image": "assets/loc-fork.png"
+    },
+    {
+      "id": "loc-meadow",
+      "name": "Open meadow",
+      "description": "A sunlit meadow.",
+      "tags": [
+        "demo"
+      ],
+      "image": "assets/loc-meadow.png"
+    },
+    {
+      "id": "loc-woods",
+      "name": "Woods path",
+      "description": "A narrow path under the trees.",
+      "tags": [
+        "demo"
+      ],
+      "image": "assets/loc-woods.png"
+    }
+  ],
+  "factions": [],
+  "history": [],
+  "other": []
+}

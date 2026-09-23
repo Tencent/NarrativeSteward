@@ -1,0 +1,25 @@
+# Credentials and runtime data
+.env
+*.env
+!.env.example
+workspace/
+results/
+data/
+# Build/development products
+node_modules/
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.log
+.DS_Store
+
+# Tool caches
+.ruff_cache/
+
+# Local coding-agent instructions
+/AGENTS.md

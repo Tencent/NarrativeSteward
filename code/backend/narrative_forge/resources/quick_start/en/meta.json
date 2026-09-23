@@ -1,0 +1,23 @@
+{
+  "id": "_builtin_quick_start_en",
+  "name": "Quick Start Demo",
+  "created_at": "2026-01-01T00:00:00+00:00",
+  "updated_at": "2026-01-01T00:00:00+00:00",
+  "revisions": {
+    "intent": 1,
+    "outline": 1,
+    "world": 1,
+    "events": 1
+  },
+  "stages": {
+    "intent": "ready",
+    "outline": "ready",
+    "world": "ready",
+    "events": "ready"
+  },
+  "scene_revisions": {
+    "ev-fork": 1,
+    "ev-meadow": 1,
+    "ev-woods": 1
+  }
+}

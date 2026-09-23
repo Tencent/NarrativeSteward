@@ -1,0 +1,83 @@
+{
+  "state_variables": [
+    {
+      "id": "var-path",
+      "name": "所选道路",
+      "type": "enum",
+      "allowed": [
+        "undecided",
+        "meadow",
+        "woods"
+      ],
+      "initial": "undecided",
+      "description": "行路人在岔路口做出的选择。情节里写入，事件连线读取，用来决定后面走哪条路。",
+      "value_descriptions": {
+        "undecided": "还没决定往哪边走",
+        "meadow": "已经选择走向草地",
+        "woods": "已经选择走进树林"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ev-fork",
+      "title": "岔路口",
+      "summary": "行路人必须决定往哪边走。",
+      "type": "mainline",
+      "characters": [
+        "char-walker"
+      ],
+      "locations": [
+        "loc-fork"
+      ]
+    },
+    {
+      "id": "ev-meadow",
+      "title": "草地尽头",
+      "summary": "向左走之后到达开阔草地。",
+      "type": "ending",
+      "characters": [
+        "char-walker"
+      ],
+      "locations": [
+        "loc-meadow"
+      ]
+    },
+    {
+      "id": "ev-woods",
+      "title": "林间歇脚",
+      "summary": "向右走之后到达树荫下的小路。",
+      "type": "ending",
+      "characters": [
+        "char-walker"
+      ],
+      "locations": [
+        "loc-woods"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-to-meadow",
+      "source": "ev-fork",
+      "target": "ev-meadow",
+      "label": "向左，走向草地",
+      "condition": {
+        "var": "var-path",
+        "op": "==",
+        "value": "meadow"
+      }
+    },
+    {
+      "id": "edge-to-woods",
+      "source": "ev-fork",
+      "target": "ev-woods",
+      "label": "向右，走进树林",
+      "condition": {
+        "var": "var-path",
+        "op": "==",
+        "value": "woods"
+      }
+    }
+  ]
+}

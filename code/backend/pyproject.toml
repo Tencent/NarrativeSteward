@@ -1,0 +1,32 @@
+[project]
+name = "narrative-forge"
+version = "0.1.0"
+license = "MIT"
+description = "交互叙事游戏生成工具的后端核心（无头核心 + Deep Agents）"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "deepagents>=0.6,<0.7",
+    "langchain-core>=0.3",
+    "langchain-openai>=0.2",
+    "openai>=2",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+# HTTP API dependencies
+api = ["fastapi>=0.110", "uvicorn>=0.29", "sse-starlette>=2.0", "python-multipart>=0.0.9"]
+
+[project.scripts]
+narrative-chat = "cli.chat:main"
+
+[build-system]
+requires = ["setuptools>=83"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["narrative_forge*", "cli*"]
+
+[tool.setuptools.package-data]
+narrative_forge = ["skills/**/*.md", "resources/quick_start/manifest.json", "resources/quick_start/zh/**/*", "resources/quick_start/en/**/*"]

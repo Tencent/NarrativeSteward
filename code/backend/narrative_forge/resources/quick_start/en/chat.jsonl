@@ -1,0 +1,2 @@
+{"role": "user", "text": "Make the fork’s choice question clearer, so players know what to do."}
+{"role": "assistant", "text": "The fork’s choice question was changed from “Which way?” to “Which way will you go?”. This turn only changed that one scene line; the story branches and choices are unchanged.", "changeset": {"id": "changeset-demo-example"}, "steps": [{"label": "Editing content", "done": true, "done_label": "Edited content", "tool": "edit_file"}]}

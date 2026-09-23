@@ -1,0 +1,56 @@
+{
+  "worldview": [
+    {
+      "id": "world-demo-road",
+      "name": "乡间道路",
+      "description": "一条安静的土路，在午后分成两条去向。",
+      "tags": [
+        "演示"
+      ],
+      "image": ""
+    }
+  ],
+  "characters": [
+    {
+      "id": "char-walker",
+      "name": "行路人",
+      "description": "路过此地的旅人。",
+      "tags": [
+        "演示"
+      ],
+      "image": "assets/char-walker.png"
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc-fork",
+      "name": "岔路口",
+      "description": "土路在这里分成草地与林间两条去向。",
+      "tags": [
+        "演示"
+      ],
+      "image": "assets/loc-fork.png"
+    },
+    {
+      "id": "loc-meadow",
+      "name": "开阔草地",
+      "description": "阳光很好的草地。",
+      "tags": [
+        "演示"
+      ],
+      "image": "assets/loc-meadow.png"
+    },
+    {
+      "id": "loc-woods",
+      "name": "林间小路",
+      "description": "树荫下的窄路。",
+      "tags": [
+        "演示"
+      ],
+      "image": "assets/loc-woods.png"
+    }
+  ],
+  "factions": [],
+  "history": [],
+  "other": []
+}

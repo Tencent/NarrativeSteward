@@ -1,0 +1,234 @@
+{
+  "version": 1,
+  "checked_at": "2026-01-01T00:00:00+00:00",
+  "fingerprint": {
+    "algorithm": "sha256",
+    "digest": "923b1e8b72bce98d9dace6eeb5ea7c20ee0ad849ffc6665f7001a4873a536b86",
+    "parts": {
+      "events": "ac350c26fde47b249ec27b1c83c0a9c591b9c320e069179e71c01281fe56f5eb",
+      "scenes": {
+        "ev-fork": "da5b74606ccb0cdaab23bdd00f141e5fcccad0cf010023640bfb2883eedf3e98",
+        "ev-meadow": "edc0879581f2c8db11e76b721642b214a12686e75e08c6058da772b1f15f903d",
+        "ev-woods": "61c8260194b2dc9568c7b0534ffbe2da607cecfb95b3908b54f1641c7ba89ee3"
+      },
+      "world_identity": "18711e5675da7fc6183acd987e8db126bb649cbb9d755cd230c6cddc067a4a30"
+    },
+    "expected_scene_ids": [
+      "ev-fork",
+      "ev-meadow",
+      "ev-woods"
+    ],
+    "present_scene_ids": [
+      "ev-fork",
+      "ev-meadow",
+      "ev-woods"
+    ]
+  },
+  "status": "passed",
+  "engine_version": "state-propagation/v1",
+  "report_schema_version": 8,
+  "report": {
+    "engine_version": "state-propagation/v1",
+    "report_schema_version": 8,
+    "status": "passed",
+    "summary": {
+      "events_reached": 3,
+      "events_total": 3,
+      "beats_reached": 6,
+      "beats_total": 6,
+      "edges_used": 5,
+      "edges_total": 5,
+      "dead_end_states": 0,
+      "states_explored": 13,
+      "issue_count": 0,
+      "warning_count": 0
+    },
+    "issues": [],
+    "warnings": [],
+    "complexity": {
+      "condition_variables": [
+        {
+          "id": "var-path",
+          "name": "所选道路",
+          "type": "enum",
+          "value_descriptions": {
+            "undecided": "还没决定往哪边走",
+            "meadow": "已经选择走向草地",
+            "woods": "已经选择走进树林"
+          },
+          "domain_size": 3,
+          "bits": 2
+        }
+      ],
+      "max_live_variables": 1,
+      "peak_states_at_position": 2,
+      "peak_frontier_states": 4,
+      "top_positions": [
+        {
+          "position": "ADV:ev-fork",
+          "position_kind": "ADV",
+          "event_id": "ev-fork",
+          "beat_id": null,
+          "states": 2,
+          "live_before": 1,
+          "live_after": 1,
+          "live_before_ids": [
+            "var-path"
+          ],
+          "live_after_ids": [
+            "var-path"
+          ]
+        },
+        {
+          "position": "EV:ev-fork",
+          "position_kind": "EV",
+          "event_id": "ev-fork",
+          "beat_id": null,
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "BT:ev-fork:beat-arrive",
+          "position_kind": "BT",
+          "event_id": "ev-fork",
+          "beat_id": "beat-arrive",
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "BT:ev-fork:beat-choose",
+          "position_kind": "BT",
+          "event_id": "ev-fork",
+          "beat_id": "beat-choose",
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "BT:ev-fork:beat-left",
+          "position_kind": "BT",
+          "event_id": "ev-fork",
+          "beat_id": "beat-left",
+          "states": 1,
+          "live_before": 0,
+          "live_after": 1,
+          "live_before_ids": [],
+          "live_after_ids": [
+            "var-path"
+          ]
+        },
+        {
+          "position": "BT:ev-fork:beat-right",
+          "position_kind": "BT",
+          "event_id": "ev-fork",
+          "beat_id": "beat-right",
+          "states": 1,
+          "live_before": 0,
+          "live_after": 1,
+          "live_before_ids": [],
+          "live_after_ids": [
+            "var-path"
+          ]
+        },
+        {
+          "position": "EV:ev-meadow",
+          "position_kind": "EV",
+          "event_id": "ev-meadow",
+          "beat_id": null,
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "ADV:ev-meadow",
+          "position_kind": "ADV",
+          "event_id": "ev-meadow",
+          "beat_id": null,
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "BT:ev-meadow:beat-meadow",
+          "position_kind": "BT",
+          "event_id": "ev-meadow",
+          "beat_id": "beat-meadow",
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "EV:ev-woods",
+          "position_kind": "EV",
+          "event_id": "ev-woods",
+          "beat_id": null,
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "ADV:ev-woods",
+          "position_kind": "ADV",
+          "event_id": "ev-woods",
+          "beat_id": null,
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        },
+        {
+          "position": "BT:ev-woods:beat-woods",
+          "position_kind": "BT",
+          "event_id": "ev-woods",
+          "beat_id": "beat-woods",
+          "states": 1,
+          "live_before": 0,
+          "live_after": 0,
+          "live_before_ids": [],
+          "live_after_ids": []
+        }
+      ]
+    },
+    "meta": {
+      "mode": "compact_exhaustive",
+      "complete": true,
+      "configs_explored": 13,
+      "configs_discovered": 13,
+      "positions_reached": 12,
+      "positions_total": 12,
+      "peak_queue_size": 4,
+      "peak_states_at_position": 2,
+      "packed_bits": 2,
+      "max_live_before_vars": 1,
+      "max_live_after_vars": 1,
+      "elapsed_ms": 0,
+      "event_nodes": 3,
+      "generated_scenes": 3,
+      "total_vars": 1,
+      "route_restore_states_examined": 0,
+      "propagation_elapsed_ms": 0,
+      "route_restore_elapsed_ms": 0,
+      "propagation_ran": true,
+      "peak_memory_bytes": 0,
+      "memory_limit_bytes": 32000000000,
+      "memory_stop_bytes": 27200000000
+    }
+  }
+}

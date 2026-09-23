@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="98" height="20" role="img" aria-label="arXiv: Paper">
+  <title>arXiv: Paper</title>
+  <linearGradient id="shade" x2="0" y2="100%">
+    <stop offset="0" stop-color="#fff" stop-opacity=".1"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <clipPath id="rounded"><rect width="98" height="20" rx="3"/></clipPath>
+  <g clip-path="url(#rounded)">
+    <path fill="#555" d="M0 0h48v20H0z"/>
+    <path fill="#b31b1b" d="M48 0h50v20H48z"/>
+    <path fill="url(#shade)" d="M0 0h98v20H0z"/>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana, Geneva, sans-serif" font-size="11">
+    <text x="24" y="15" fill="#010101" fill-opacity=".3">arXiv</text>
+    <text x="24" y="14">arXiv</text>
+    <text x="73" y="15" fill="#010101" fill-opacity=".3">Paper</text>
+    <text x="73" y="14">Paper</text>
+  </g>
+</svg>

@@ -1,0 +1,72 @@
+{
+  "event_id": "ev-fork",
+  "beats": [
+    {
+      "id": "beat-arrive",
+      "kind": "narration",
+      "speaker": "",
+      "content": "土路在前方分开。左边是亮堂的草地，右边是树荫里的小路。",
+      "location": "loc-fork",
+      "effects": []
+    },
+    {
+      "id": "beat-choose",
+      "kind": "choice",
+      "speaker": "",
+      "content": "你要往哪边走？",
+      "location": "loc-fork",
+      "effects": []
+    },
+    {
+      "id": "beat-left",
+      "kind": "narration",
+      "speaker": "",
+      "content": "你迈向左边的草地。风把草梢吹得轻轻晃动。",
+      "location": "loc-fork",
+      "effects": [
+        {
+          "var": "var-path",
+          "op": "set",
+          "value": "meadow"
+        }
+      ]
+    },
+    {
+      "id": "beat-right",
+      "kind": "narration",
+      "speaker": "",
+      "content": "你走进右边的树荫。空气立刻凉了一截。",
+      "location": "loc-fork",
+      "effects": [
+        {
+          "var": "var-path",
+          "op": "set",
+          "value": "woods"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "se-arrive-choose",
+      "source": "beat-arrive",
+      "target": "beat-choose",
+      "label": "",
+      "condition": null
+    },
+    {
+      "id": "se-choose-left",
+      "source": "beat-choose",
+      "target": "beat-left",
+      "label": "向左，走向草地",
+      "condition": null
+    },
+    {
+      "id": "se-choose-right",
+      "source": "beat-choose",
+      "target": "beat-right",
+      "label": "向右，走进树林",
+      "condition": null
+    }
+  ]
+}

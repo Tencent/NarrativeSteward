@@ -1,0 +1,14 @@
+{
+  "event_id": "ev-meadow",
+  "beats": [
+    {
+      "id": "beat-meadow",
+      "kind": "narration",
+      "speaker": "",
+      "content": "草地很开阔。行路人在石头上坐下来，决定在这里歇一会儿。",
+      "location": "loc-meadow",
+      "effects": []
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,14 @@
+{
+  "event_id": "ev-meadow",
+  "beats": [
+    {
+      "id": "beat-meadow",
+      "kind": "narration",
+      "speaker": "",
+      "content": "The meadow is wide. The walker sits on a stone and decides to rest here.",
+      "location": "loc-meadow",
+      "effects": []
+    }
+  ],
+  "edges": []
+}

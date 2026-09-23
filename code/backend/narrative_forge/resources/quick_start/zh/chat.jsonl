@@ -1,0 +1,2 @@
+{"role": "user", "text": "把岔路口的选择问句改得更自然，让玩家一眼知道要做什么。"}
+{"role": "assistant", "text": "已将岔路口的选择问句从「往哪边？」改为「你要往哪边走？」。本次只修改了这一处情节内容，故事分支和选项保持不变。", "changeset": {"id": "changeset-demo-example"}, "steps": [{"label": "正在修改内容", "done": true, "done_label": "已修改内容"}]}

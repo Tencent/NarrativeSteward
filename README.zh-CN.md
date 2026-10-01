@@ -1,13 +1,14 @@
 # NarrativeSteward
 
-![arXiv Paper](docs/images/arxiv-badge.svg)
-<!-- 论文链接确定后，为徽章添加对应的 arXiv 地址。 -->
+[![arXiv Paper](docs/images/arxiv-badge.svg)](https://arxiv.org/abs/2609.39333)
 
 <a href="README.md"><kbd>English</kbd></a> · <a href="README.zh-CN.md"><kbd>简体中文</kbd></a>
 
 **一个支持 AI 协作创作与试玩的交互叙事工作空间。**
 
 将故事想法和参考素材整理为世界卡片、相互关联的事件与分支场景。你可以与 AI 助手共同创作，检查每次修改，再通过试玩观察玩家选择如何影响后续路径。界面与内置教程均支持中英文。
+
+论文：[NarrativeSteward: Coordinating Delegation, Guidance, and Verification in Agent-Assisted Interactive Narrative Authoring](https://arxiv.org/abs/2609.39333)
 
 ## 组织和编辑故事
 
@@ -156,3 +157,18 @@ npm run dev
 - `code/frontend`：React 编辑器与试玩界面。
 - [docs/DESIGN.md](docs/DESIGN.md)：应用架构与运行约束。
 - [docs/CHANGELOG.md](docs/CHANGELOG.md)：版本说明。
+
+## 引用
+
+如果你在研究中使用 NarrativeSteward，请引用我们的论文：
+
+```bibtex
+@article{wang2026narrativesteward,
+  title   = {{NarrativeSteward}: Coordinating Delegation, Guidance, and Verification in Agent-Assisted Interactive Narrative Authoring},
+  author  = {Wang, Wenjin and Lei, Jiazhen and Sha, Yuxin and
+             Xi, Nuwa and Zhao, Meng and Yin, Xingxi and
+             Liu, Qi and Shen, Yuliang and Sun, Zixun},
+  journal = {arXiv preprint arXiv:2609.39333},
+  year    = {2026}
+}
+```

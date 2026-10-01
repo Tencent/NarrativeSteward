@@ -1,13 +1,14 @@
 # NarrativeSteward
 
-![arXiv Paper](docs/images/arxiv-badge.svg)
-<!-- Link the badge to the paper's arXiv URL when available. -->
+[![arXiv Paper](docs/images/arxiv-badge.svg)](https://arxiv.org/abs/2609.39333)
 
 <a href="README.md"><kbd>English</kbd></a> · <a href="README.zh-CN.md"><kbd>简体中文</kbd></a>
 
 **An AI-assisted workspace for creating and playtesting interactive stories.**
 
 Turn story ideas and source material into world cards, connected events and branching scenes. Work with an AI assistant, inspect what changed, and play through the story to see how choices shape later paths. The interface and built-in tutorials support English and Chinese.
+
+Paper: [NarrativeSteward: Coordinating Delegation, Guidance, and Verification in Agent-Assisted Interactive Narrative Authoring](https://arxiv.org/abs/2609.39333)
 
 ## Explore the workspace
 
@@ -156,3 +157,18 @@ Projects are saved in `workspace/` at the repository root. Set `NARRATIVE_FORGE_
 - `code/frontend`: React editor and playtest interface.
 - [docs/DESIGN.md](docs/DESIGN.md): application architecture and runtime constraints.
 - [docs/CHANGELOG.md](docs/CHANGELOG.md): release notes.
+
+## Citation
+
+If you use NarrativeSteward in your research, please cite our paper:
+
+```bibtex
+@article{wang2026narrativesteward,
+  title   = {{NarrativeSteward}: Coordinating Delegation, Guidance, and Verification in Agent-Assisted Interactive Narrative Authoring},
+  author  = {Wang, Wenjin and Lei, Jiazhen and Sha, Yuxin and
+             Xi, Nuwa and Zhao, Meng and Yin, Xingxi and
+             Liu, Qi and Shen, Yuliang and Sun, Zixun},
+  journal = {arXiv preprint arXiv:2609.39333},
+  year    = {2026}
+}
+```

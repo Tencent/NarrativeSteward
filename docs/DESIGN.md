@@ -49,4 +49,4 @@ Character cards support optional `image_display`: `portrait` (default), `object`
 
 ## Repository overview
 
-Both README languages place an inline video player, with no cover-image link to another page, immediately before four playback steps: build the player, download a story-data ZIP, extract it and copy the player, then open the game. The instructions stay in the README without a separate example guide. The arXiv badge and citation remain the paper entry points.
+On GitHub, both README languages use a standalone GitHub video-attachment URL to render an inline video player, with no cover-image link to another page, immediately before four playback steps: build the player, download a story-data ZIP, extract it and copy the player, then open the game. The instructions stay in the README without a separate example guide. The arXiv badge and citation remain the paper entry points.

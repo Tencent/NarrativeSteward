@@ -71,3 +71,8 @@ Initial release:
 ## Inline showcase preview
 
 - Replace the linked showcase cover with an inline video element above the four-step playback guide.
+
+
+## GitHub inline video
+
+- Use GitHub video attachments to play the showcase directly in both README languages.

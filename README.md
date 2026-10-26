@@ -6,7 +6,7 @@
 
 **An AI-assisted workspace for creating and playtesting interactive stories.**
 
-<video src="docs/media/showcase-zh.mp4" controls playsinline preload="metadata" width="100%"></video>
+https://github.com/user-attachments/assets/1814bfc1-8c7d-4dbf-9e42-96b562570ae2
 
 ## Play a game
 

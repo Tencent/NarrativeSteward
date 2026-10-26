@@ -36,10 +36,12 @@ export const PLAYTEST_MISSING_CHARACTER_ART = playtestMissingCharacterArt()
  * @param {boolean} [input.isSpeech] 当前 beat 是否为带说话人的对话或独白。
  * @param {string} [input.speakerName] 说话人显示名。
  * @param {boolean} [input.isCharacterSpeaker] 是否为角色发言者；只有角色才显示立绘或缺图提示。
- * @param {string} [input.charImage] 已成功加载的角色立绘 URL；没有则为空。
+ * @param {string} [input.charImage] 已成功加载的角色配图 URL；没有则为空。
+ * @param {'portrait'|'object'|'scene'} [input.imageDisplay] 人物立绘、器物形象或整幅场景特写。
  * @returns {{
  *   bgImage: string,
  *   charImage: string,
+ *   portraitDisplay: string,
  *   missingLocationImage: boolean,
  *   missingCharacterImage: boolean,
  * }}
@@ -51,14 +53,18 @@ export function playtestVisuals({
   speakerName = '',
   isCharacterSpeaker = false,
   charImage = '',
+  imageDisplay = 'portrait',
 } = {}) {
   const hasBg = Boolean(bgImage)
   const showPortrait = Boolean(isSpeech && isCharacterSpeaker)
   const hasPortrait = Boolean(showPortrait && charImage)
+  const display = ['object', 'scene'].includes(imageDisplay) ? imageDisplay : 'portrait'
+  const sceneImage = hasPortrait && display === 'scene'
   return {
-    bgImage: hasBg ? bgImage : '',
-    charImage: hasPortrait ? charImage : '',
-    missingLocationImage: Boolean(locationName) && !hasBg,
+    bgImage: sceneImage ? charImage : (hasBg ? bgImage : ''),
+    charImage: hasPortrait && !sceneImage ? charImage : '',
+    portraitDisplay: showPortrait ? display : 'portrait',
+    missingLocationImage: Boolean(locationName) && !hasBg && !sceneImage,
     missingCharacterImage: Boolean(showPortrait && speakerName) && !hasPortrait,
   }
 }

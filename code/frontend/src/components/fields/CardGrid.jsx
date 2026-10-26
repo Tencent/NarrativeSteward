@@ -206,6 +206,18 @@ export default function CardGrid({
             }}
           />
         )}
+        {current != null && category === 'characters' && (
+          <label className="field">
+            <span className="field-label">{t('artifacts.world.imageDisplay')}</span>
+            <select value={current.image_display || 'portrait'} disabled={disabled || previewNewCard}
+              onChange={(e) => { if (!previewNewCard && openIndex != null) update(openIndex, 'image_display', e.target.value) }}>
+              <option value="portrait">{t('artifacts.world.displayPortrait')}</option>
+              <option value="object">{t('artifacts.world.displayObject')}</option>
+              <option value="scene">{t('artifacts.world.displayScene')}</option>
+            </select>
+            <span className="muted">{t('artifacts.world.imageDisplayHint')}</span>
+          </label>
+        )}
         {current != null &&
           fields.map((f) =>
             f.type === 'tags' ? (

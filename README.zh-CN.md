@@ -6,9 +6,37 @@
 
 **一个支持 AI 协作创作与试玩的交互叙事工作空间。**
 
-将故事想法和参考素材整理为世界卡片、相互关联的事件与分支场景。你可以与 AI 助手共同创作，检查每次修改，再通过试玩观察玩家选择如何影响后续路径。界面与内置教程均支持中英文。
+<video src="docs/media/showcase-zh.mp4" controls playsinline preload="metadata" width="100%"></video>
 
-论文：[NarrativeSteward: Coordinating Delegation, Guidance, and Verification in Agent-Assisted Interactive Narrative Authoring](https://arxiv.org/abs/2609.39333)
+## 试玩游戏
+
+需要 Node.js 24 LTS（24.21.0 或更高的 24.x 版本）。
+
+1. **下载源码，生成播放器。**
+
+   ```bash
+   git clone https://github.com/Tencent/NarrativeSteward.git
+   cd NarrativeSteward/code/frontend
+   npm ci
+   npm run build:player
+   cd ../..
+   ```
+
+   生成文件：`code/backend/narrative_forge/resources/player.html`。
+
+2. **从 [GitHub Releases](https://github.com/Tencent/NarrativeSteward/releases) 下载一个游戏数据包：**
+
+   - 《别把我炼成锅》：`xianxia-story-data.zip`
+   - 《夷陵未燃》：`yiling-story-data.zip`
+   - 《星海拾荒》：`star-sea-story-data.zip`
+
+3. **将 ZIP 解压到仓库根目录的 `game` 文件夹，再复制播放器：**
+
+   ```bash
+   cp code/backend/narrative_forge/resources/player.html game/player.html
+   ```
+
+4. **双击 `game/player.html`，点击“开始游戏”。**
 
 ## 组织和编辑故事
 
@@ -33,6 +61,10 @@
 ![试玩岔路口故事，查看可进入和被锁定的路径](docs/images/playtest.png)
 
 *选择树林后，通往树林的路线开放，草地路线仍然锁定。截图使用英文示例，应用也支持中文界面与教程。*
+
+## 导出与离线游玩
+
+保存项目，点击 **导出项目**，解压 ZIP 后打开 `player.html`。修改故事后重新导出即可。
 
 ## 本地运行
 

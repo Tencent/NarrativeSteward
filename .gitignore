@@ -23,3 +23,6 @@ venv/
 
 # Local coding-agent instructions
 /AGENTS.md
+
+# Offline player generated locally from source
+/code/backend/narrative_forge/resources/player.html

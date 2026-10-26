@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { describePlayCondition } from '../playStatePresentation.js'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { api } from '../api'
 import { findEntryNodeId } from '../graphUtils'
 import { useT } from '../i18n'
@@ -110,21 +111,14 @@ async function resolvePlaytestImage(candidate) {
 
 // 找变量当前值与条件要求的差距（供死路诊断展示）。
 function describeGap(cond, vars, varById, t) {
-  const v = varById[cond?.var]
-  const name = v?.name || cond?.var
-  const actual = JSON.stringify(vars[cond?.var])
-  return t('playtest.condGap', {
-    name,
-    op: cond.op,
-    expected: JSON.stringify(cond.value),
-    actual,
-  })
+  return describePlayCondition(cond, vars, varById, t)
 }
 
 /**
  * 试玩引擎 hook。
  *
  * @param {string} projectId 当前项目 id。
+ * @param {object} dataSource 数据读取与图片地址适配器；默认使用平台 API。
  * @returns {{
  *   status: 'idle'|'loading'|'blocked'|'playing'|'dead_end'|'ending'|'error',
  *   history: Array<object>,   // 已走过的 beat/事件展示项（滚动阅读用）
@@ -140,9 +134,11 @@ function describeGap(cond, vars, varById, t) {
  *   start(): void,
  *   choose(edgeId): void,
  *   undo(): void,
+ *   routeEventIds: string[],
+ *   rewindToEvent(eventId: string): {historyLength: number}|null,
  * }}
  */
-export function usePlaytest(projectId) {
+export function usePlaytest(projectId, dataSource = api) {
   const t = useT()
   const [status, setStatus] = useState('idle')
   const [errorMsg, setErrorMsg] = useState(null)
@@ -166,20 +162,22 @@ export function usePlaytest(projectId) {
   // 均为可选：无配图或加载失败时界面显示名称并提示缺少配图，不套内置默认图。
   const locImageByIdRef = useRef({})
   const charImageByIdRef = useRef({})
+  const charDisplayByIdRef = useRef({})
   // 地点卡片 id→name：供画面顶部展示"当前地点名称"。
   const locNameByIdRef = useRef({})
   // 回退栈：每步转移前压入快照 {eventId, beatId, vars, historyLen}。
   const undoStackRef = useRef([])
+  const [eventCheckpoints, setEventCheckpoints] = useState([])
 
   const canUndo = undoStackRef.current.length > 0
 
   const loadScene = useCallback(async (eventId) => {
     if (eventId in sceneCacheRef.current) return sceneCacheRef.current[eventId]
-    const state = await api.getScene(projectId, eventId)
+    const state = await dataSource.getScene(projectId, eventId)
     const scene = state?.exists ? state.content : null
     sceneCacheRef.current[eventId] = scene
     return scene
-  }, [projectId])
+  }, [projectId, dataSource])
 
   // 渲染并停在某个 beat：应用 effects → 追加历史 → 计算可选出边 / 死路 / 情节终止。
   const enterBeat = useCallback(
@@ -193,10 +191,10 @@ export function usePlaytest(projectId) {
         isCharacterSpeaker: resolved.isCharacterSpeaker,
       }
       // 配图（DESIGN §5.8）：背景取地点卡片 image；立绘只给角色发言者。
-      const locImg = api.assetUrl(projectId, beat.location ? locImageByIdRef.current[beat.location] : '')
+      const locImg = dataSource.assetUrl(projectId, beat.location ? locImageByIdRef.current[beat.location] : '')
       const isSpeech = (beat.kind === 'dialogue' || beat.kind === 'monologue') && beat.speaker
       const portraitId = resolved.isCharacterSpeaker ? (resolved.cardId || beat.speaker) : ''
-      const charImg = api.assetUrl(projectId, portraitId ? charImageByIdRef.current[portraitId] : '')
+      const charImg = dataSource.assetUrl(projectId, portraitId ? charImageByIdRef.current[portraitId] : '')
       // 配图解码前先记下稳定位置，避免对话面板在加载期间拿不到 event_id。
       setCurrent({
         event_id: eventNode.id,
@@ -217,6 +215,7 @@ export function usePlaytest(projectId) {
         speakerName: displayBeat.speakerDisplayName || '',
         isCharacterSpeaker: resolved.isCharacterSpeaker,
         charImage: loadedChar,
+        imageDisplay: charDisplayByIdRef.current[portraitId],
       })
       setHistory((h) => [...h, {
         kind: 'beat',
@@ -232,7 +231,7 @@ export function usePlaytest(projectId) {
       const ok = satisfiedEdges(beatId, scene.edges, nextVars)
       return { beat, outs, ok, nextVars }
     },
-    [projectId],
+    [projectId, dataSource],
   )
 
   const varById = useMemo(() => eventGraphRef.current?.varById || {}, [status])
@@ -378,11 +377,12 @@ export function usePlaytest(projectId) {
     setCurrent(null)
     setTakenEdges([])
     undoStackRef.current = []
+    setEventCheckpoints([])
     sceneCacheRef.current = {}
     try {
       const [events, world] = await Promise.all([
-        api.getData(projectId, 'events'),
-        api.getData(projectId, 'world').catch(() => null), // world 可能未生成，不影响试玩，仅影响 speaker 解析
+        dataSource.getData(projectId, 'events'),
+        dataSource.getData(projectId, 'world').catch(() => null), // world 可能未生成，不影响试玩，仅影响 speaker 解析
       ])
       const content = events?.content
       if (!content?.nodes?.length) {
@@ -400,6 +400,9 @@ export function usePlaytest(projectId) {
       charImageByIdRef.current = Object.fromEntries(
         (world?.content?.characters || []).map((c) => [c.id, c.image || '']),
       )
+      charDisplayByIdRef.current = Object.fromEntries(
+        (world?.content?.characters || []).map((c) => [c.id, c.image_display || 'portrait']),
+      )
       locNameByIdRef.current = Object.fromEntries(
         (world?.content?.locations || []).map((l) => [l.id, l.name || l.id]),
       )
@@ -412,7 +415,7 @@ export function usePlaytest(projectId) {
       setStatus('error')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectId, enterEvent, t])
+  }, [projectId, dataSource, enterEvent, t])
 
   // 玩家选择某个出边（含"仅剩一条"时的"下一步"）。
   const choose = useCallback(
@@ -503,6 +506,7 @@ export function usePlaytest(projectId) {
   const undo = useCallback(() => {
     const snap = undoStackRef.current.pop()
     if (!snap) return
+    setEventCheckpoints(entries => entries.filter(entry => entry.history.length <= snap.historyLen))
     pendingRef.current = snap.pending
     setVars(snap.vars)
     setHistory((h) => h.slice(0, snap.historyLen))
@@ -515,12 +519,60 @@ export function usePlaytest(projectId) {
     setTakenEdges(snap.takenEdges || [])
   }, [])
 
+  // Capture a settled entry screen after its effects have run once. Restore it
+  // directly: replaying enterEvent here would grant/add entry effects twice.
+  useEffect(() => {
+    if (isAdvancing || !['playing', 'dead_end'].includes(status)) return
+    const row = history.at(-1)
+    if (row?.kind !== 'beat' || history.at(-2)?.kind !== 'event_enter' ||
+        row.eventId !== current?.event_id || row.beat.id !== current?.beat_id) return
+    setEventCheckpoints(entries => {
+      if (entries.some(entry => entry.eventId === row.eventId && entry.history.length === history.length)) return entries
+      return [...entries, {
+        eventId: row.eventId, history, vars, choices, status, deadEndInfo, ending,
+        blockedEvent, current, takenEdges, pending: pendingRef.current,
+        undoStack: undoStackRef.current.slice(),
+      }]
+    })
+  }, [isAdvancing, status, history, current, vars, choices, deadEndInfo, ending, blockedEvent, takenEdges])
+
+  // Only current-route checkpoints survive undo/rewind. A merged event must
+  // restore this route's entry, never a checkpoint from another playthrough.
+  const rewindToEvent = useCallback((eventId) => {
+    if (isAdvancing || status === 'loading') return null
+    const index = eventCheckpoints.findLastIndex(entry => entry.eventId === eventId)
+    if (index < 0) return null
+    const snap = eventCheckpoints[index]
+    undoStackRef.current = snap.undoStack.slice()
+    pendingRef.current = snap.pending
+    setEventCheckpoints(eventCheckpoints.slice(0, index + 1))
+    setVars(snap.vars)
+    setHistory(snap.history)
+    setChoices(snap.choices)
+    setStatus(snap.status)
+    setDeadEndInfo(snap.deadEndInfo)
+    setEnding(snap.ending)
+    setBlockedEvent(snap.blockedEvent)
+    setCurrent(snap.current)
+    setTakenEdges(snap.takenEdges)
+    setErrorMsg(null)
+    return { historyLength: snap.history.length }
+  }, [eventCheckpoints, isAdvancing, status])
+
+  // Translate from the live predicate after language switches and undo as well.
+  const presentedChoices = useMemo(() => choices.map(choice => ({
+    ...choice,
+    disabledReason: choice.disabled
+      ? describePlayCondition(choice.edge?.condition, vars, varById, t)
+      : null,
+  })), [choices, vars, varById, t])
+
   return {
     status,
     errorMsg,
     history,
     vars,
-    choices,
+    choices: presentedChoices,
     deadEndInfo,
     ending,
     blockedEvent,
@@ -529,6 +581,8 @@ export function usePlaytest(projectId) {
     varList: Object.values(varById),
     current,
     takenEdges,
+    routeEventIds: eventCheckpoints.map(entry => entry.eventId),
+    rewindToEvent,
     start,
     choose,
     undo,

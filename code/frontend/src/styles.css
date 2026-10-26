@@ -4346,3 +4346,8 @@ textarea.md-editor {
   border-radius: 4px;
   font-size: 0.92em;
 }
+
+.pt-portrait.pt-portrait-object{top:14%;bottom:auto;width:28%;height:40%;max-width:320px;max-height:40%;object-fit:contain}
+.pt-portrait-object.pt-portrait-left{left:8%}
+.pt-portrait-object.pt-portrait-right{right:8%}
+@media(max-width:600px){.pt-portrait.pt-portrait-object{width:60%;max-width:260px;height:34%;max-height:34%}.pt-portrait-object.pt-portrait-left{left:12%}.pt-portrait-object.pt-portrait-right{right:12%}}

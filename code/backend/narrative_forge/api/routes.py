@@ -1434,3 +1434,27 @@ async def _run_turn(
             workspaces.drop_turn(project_id, turn_id)
         await locks.release(project_id)
         bus.publish(project_id, {"type": "turn_end", "turn_id": turn_id})
+
+
+@router.get("/projects/{project_id}/export")
+async def export_project(request: Request, project_id: str):
+    """Download a saved story with its offline player, excluding authoring history."""
+    from fastapi.responses import Response
+    from narrative_forge.core.project_export import build_project_export
+
+    _require_project(request, project_id)
+    locks = _locks(request)
+    if not await locks.acquire(project_id):
+        raise HTTPException(409, "项目正在修改，请稍候 / Project is busy. Try again shortly.")
+    try:
+        payload = await asyncio.to_thread(build_project_export, _store(request), project_id)
+        return Response(payload, media_type="application/zip", headers={
+            "Content-Disposition": 'attachment; filename="NarrativeSteward-project.zip"',
+            "Cache-Control": "no-store",
+        })
+    except (ValueError, OSError) as exc:
+        # Do not include filesystem paths from OS exceptions in the response.
+        detail = str(exc) if isinstance(exc, ValueError) else "无法读取项目文件 / Could not read project files."
+        raise HTTPException(422, detail) from exc
+    finally:
+        await locks.release(project_id)

@@ -9,13 +9,15 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 from pydantic import BaseModel, ConfigDict, Field
 
 
 class WorldCard(BaseModel):
     """一张设定卡片（各子类型通用）。
 
-    用 ``extra="forbid"`` 严格限定字段——只允许 ``id/name/description/tags/image`` 五个键，
+    用 ``extra="forbid"`` 严格限定字段，包括可选的角色配图显示方式 ``image_display``，
     出现其它键（如自造的 ``summary``/``details``）会校验失败，触发回合末自纠，
     避免 Agent 自由发挥导致前端表单无法渲染。更丰富的信息应合并进 ``description``。
 
@@ -27,6 +29,8 @@ class WorldCard(BaseModel):
         image: 可选配图的**项目内相对路径**（如 ``"assets/<uuid>.png"``，见 DESIGN §5.8）。
             主要用于角色 / 地点卡片，供试玩体验层做背景图 / 角色立绘；缺省空串表示无配图。
             可由用户上传、面板生图或主 Agent 按明确请求生成，故不参与硬校验、留空即可。
+        image_display: 角色发言时配图的呈现方式；portrait 为人物立绘，object 为较小器物，
+            scene 为整幅场景特写。只影响角色配图呈现，不改变角色分类或分支逻辑。
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -36,6 +40,8 @@ class WorldCard(BaseModel):
     description: str = ""
     tags: list[str] = Field(default_factory=list)
     image: str = ""
+    # Applies to character speech only; absent values preserve legacy portraits.
+    image_display: Literal["portrait", "object", "scene"] = "portrait"
 
 
 # 与前端 WorldForm / speaker 解析共用的六类设定键（见 DESIGN §4.5）。

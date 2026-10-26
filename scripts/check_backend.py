@@ -11,6 +11,9 @@ import tempfile
 
 def main() -> int:
     backend = Path(__file__).resolve().parents[1] / "code" / "backend"
+    if not (backend / "narrative_forge/resources/player.html").is_file():
+        print("Build the local player before export checks: cd code/frontend && npm ci && npm run build:player", file=sys.stderr)
+        return 1
     checks = sorted((backend / "tests").glob("*_check.py"))
     failed = []
     with tempfile.TemporaryDirectory(prefix="narrativesteward_checks_") as tmp:

@@ -29,4 +29,7 @@ where = ["."]
 include = ["narrative_forge*", "cli*"]
 
 [tool.setuptools.package-data]
-narrative_forge = ["skills/**/*.md", "resources/quick_start/manifest.json", "resources/quick_start/zh/**/*", "resources/quick_start/en/**/*"]
+narrative_forge = ["resources/player-license.txt", "skills/**/*.md", "resources/quick_start/manifest.json", "resources/quick_start/zh/**/*", "resources/quick_start/en/**/*"]
+
+[tool.setuptools.exclude-package-data]
+narrative_forge = ["resources/player.html"]

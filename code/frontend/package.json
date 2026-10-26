@@ -10,7 +10,7 @@
   "description": "NarrativeSteward 互动叙事创作工作空间前端",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:player && vite build",
     "check:api-contract": "node tests/api_contract_check.mjs",
     "check:onboarding": "node tests/quick_start_check.mjs",
     "check:concept-help": "node tests/concept_help_check.mjs",
@@ -30,8 +30,12 @@
     "check:chat-input-autogrow": "node tests/chat_input_autogrow_check.mjs",
     "check:chat-panel-resize": "node tests/chat_panel_resize_check.mjs",
     "check:branding": "node tests/branding_check.mjs",
-    "check": "node tests/agent_stop_check.mjs && node tests/api_contract_check.mjs && node tests/asset_operation_check.mjs && node tests/branding_check.mjs && node tests/change_presentation_check.mjs && node tests/chat_input_autogrow_check.mjs && node tests/chat_panel_resize_check.mjs && node tests/concept_help_check.mjs && node tests/event_network_recovery_check.mjs && node tests/execution_trace_check.mjs && node tests/graph_continuity_check.mjs && node tests/locale_check.mjs && node tests/playtest_context_check.mjs && node tests/playtest_session_check.mjs && node tests/playtest_visuals_check.mjs && node tests/project_refresh_check.mjs && node tests/quick_start_check.mjs && node tests/quick_start_return_check.mjs && node tests/scene_network_recovery_check.mjs && node tests/world_card_references_check.mjs",
-    "preview": "vite preview"
+    "check": "node tests/agent_stop_check.mjs && node tests/api_contract_check.mjs && node tests/asset_operation_check.mjs && node tests/branding_check.mjs && node tests/change_presentation_check.mjs && node tests/chat_input_autogrow_check.mjs && node tests/chat_panel_resize_check.mjs && node tests/concept_help_check.mjs && node tests/event_network_recovery_check.mjs && node tests/execution_trace_check.mjs && node tests/graph_continuity_check.mjs && node tests/locale_check.mjs && node tests/playtest_context_check.mjs && node tests/playtest_session_check.mjs && node tests/playtest_visuals_check.mjs && node tests/project_refresh_check.mjs && node tests/quick_start_check.mjs && node tests/quick_start_return_check.mjs && node tests/scene_network_recovery_check.mjs && node tests/world_card_references_check.mjs && npm run check:project-package && npm run check:play-state",
+    "preview": "vite preview",
+    "build:player": "node scripts/build-player.mjs",
+    "check:project-package": "node tests/project_package_check.mjs",
+    "check:play-state": "node tests/play_state_presentation_check.mjs",
+    "predev": "npm run build:player"
   },
   "dependencies": {
     "@xyflow/react": "^12.11.2",

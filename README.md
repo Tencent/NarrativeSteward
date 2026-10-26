@@ -6,9 +6,37 @@
 
 **An AI-assisted workspace for creating and playtesting interactive stories.**
 
-Turn story ideas and source material into world cards, connected events and branching scenes. Work with an AI assistant, inspect what changed, and play through the story to see how choices shape later paths. The interface and built-in tutorials support English and Chinese.
+<video src="docs/media/showcase-zh.mp4" controls playsinline preload="metadata" width="100%"></video>
 
-Paper: [NarrativeSteward: Coordinating Delegation, Guidance, and Verification in Agent-Assisted Interactive Narrative Authoring](https://arxiv.org/abs/2609.39333)
+## Play a game
+
+Requires Node.js 24 LTS (24.21.0 or newer within 24.x).
+
+1. **Download the source and build the player.**
+
+   ```bash
+   git clone https://github.com/Tencent/NarrativeSteward.git
+   cd NarrativeSteward/code/frontend
+   npm ci
+   npm run build:player
+   cd ../..
+   ```
+
+   Output: `code/backend/narrative_forge/resources/player.html`.
+
+2. **Download a story-data ZIP from [GitHub Releases](https://github.com/Tencent/NarrativeSteward/releases):**
+
+   - 别把我炼成锅: `xianxia-story-data.zip`
+   - 夷陵未燃: `yiling-story-data.zip`
+   - 星海拾荒: `star-sea-story-data.zip`
+
+3. **Extract the ZIP into `game` at the repository root, then copy the player:**
+
+   ```bash
+   cp code/backend/narrative_forge/resources/player.html game/player.html
+   ```
+
+4. **Open `game/player.html` and click “Start story”.**
 
 ## Explore the workspace
 
@@ -33,6 +61,10 @@ Check story structure and state-dependent paths, then try the story from the pla
 ![Playtesting The Fork with available and locked routes](docs/images/playtest.png)
 
 *Choosing the woods opens the woods route and leaves the meadow route locked.*
+
+## Export and play offline
+
+Save your project, click **Export project**, extract the ZIP, and open `player.html`. Export again after editing the story.
 
 ## Run locally
 

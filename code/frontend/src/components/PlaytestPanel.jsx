@@ -7,7 +7,7 @@ import { playtestCitableEdgeIds, resolvePlaytestCurrent } from '../playtestConte
 import { useT } from '../i18n';
 import { ConceptHelpTrigger } from './ConceptHelpContext';
 import { tZh } from '../i18n/translate.js';
-import { formatStateVariableValue } from '../stateVariableValues';
+import { formatPlayStateValue } from '../playStatePresentation.js';
 function beatKindLabels(t = tZh) {
   return {
     narration: t('playtest.kinds.narration'),
@@ -91,7 +91,7 @@ function StateDrawer({
           {varList.map((v) => <div className="pt-state-row" key={v.id}>
               <span className="pt-state-name">{v.name || v.id}</span>
               <span className="pt-state-value">
-                {formatStateVariableValue(v, vars[v.id])}
+                {formatPlayStateValue(v, vars[v.id], t)}
               </span>
             </div>)}
         </div>}
@@ -252,7 +252,7 @@ export default function PlaytestPanel({
             {missingLocationImage && <span className="pt-missing-art">{playtestMissingLocationArt(t)}</span>}
           </div>}
         <StateDrawer vars={pt.vars} varList={pt.varList} />
-        {charImage ? <img className={`pt-portrait pt-portrait-${side}`} src={charImage} alt={speakerCaption(beat, t)} /> : missingCharacterImage ? <div className={`pt-portrait pt-portrait-missing pt-portrait-${side}`}>
+        {charImage ? <img className={`pt-portrait pt-portrait-${side}${currentItem?.portraitDisplay === 'object' ? ' pt-portrait-object' : ''}`} src={charImage} alt={speakerCaption(beat, t)} /> : missingCharacterImage ? <div className={`pt-portrait pt-portrait-missing pt-portrait-${side}`}>
             <span className="pt-portrait-name">{speakerCaption(beat, t)}</span>
             <span className="pt-missing-art">{playtestMissingCharacterArt(t)}</span>
           </div> : null}

@@ -66,6 +66,11 @@ export const artifacts = {
       noImage: '（暂无配图）',
       removeImage: '移除',
       imageField: '配图',
+      imageDisplay: '发言时的配图展示',
+      displayPortrait: '人物立绘',
+      displayObject: '器物形象（较小）',
+      displayScene: '场景特写（铺满画面）',
+      imageDisplayHint: '场景特写会在该角色发言时替换地点背景；下一段按其设定恢复画面。',
     },
     cards: {
       worldview: '世界观',
@@ -154,6 +159,11 @@ export const artifacts = {
       noImage: '(No image yet)',
       removeImage: 'Remove',
       imageField: 'Image',
+      imageDisplay: 'Artwork while speaking',
+      displayPortrait: 'Character portrait',
+      displayObject: 'Object portrait (smaller)',
+      displayScene: 'Scene close-up (full stage)',
+      imageDisplayHint: 'A scene close-up replaces the location background during this character’s speech. The next passage uses its own artwork.',
     },
     cards: {
       worldview: 'Worldview',

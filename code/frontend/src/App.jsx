@@ -1,3 +1,4 @@
+import ExportProjectButton from './components/ExportProjectButton'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { api } from './api';
 import { useProjectEvents } from './hooks/useProjectEvents';
@@ -1709,6 +1710,7 @@ export default function App() {
               </span>}
               </>}
             <div className="build-head-actions">
+              {selectedId && <ExportProjectButton projectId={selectedId} disabled={busy || agentTurnActive || projectSwitching || Boolean(assetOperation) || hasBlockingDraft(dirtyMap)} />}
               <LocaleSwitch />
               <button type="button" className="btn btn-ghost btn-small" data-quickstart="quick-start-rerun" onClick={() => openQuickStart(false)}>
                 {t('workspace.chrome.quickStart')}

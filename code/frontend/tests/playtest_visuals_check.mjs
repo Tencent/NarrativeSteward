@@ -83,3 +83,22 @@ assert.equal(panelSource.includes('playtestMissingLocationArt'), true, '试玩�
 assert.equal(panelSource.includes('playtestMissingCharacterArt'), true, '试玩舞台提示角色卡片缺少配图')
 
 console.log('playtest_visuals_check: pass')
+
+const speech = {locationName:'问钟台',bgImage:'/test.png',isSpeech:true,isCharacterSpeaker:true,speakerName:'归来'}
+const closeUp = playtestVisuals({...speech,charImage:'/bell.png',imageDisplay:'scene'})
+assert.equal(closeUp.bgImage, '/bell.png', '场景角色发言使用特写')
+assert.equal(closeUp.charImage, '', '不在旧钟背景上再叠第二口钟')
+assert.equal(closeUp.missingCharacterImage, false)
+const narrationAfter = playtestVisuals({...speech,isSpeech:false,charImage:'/bell.png',imageDisplay:'scene'})
+assert.equal(narrationAfter.bgImage, '/test.png', '进入旁白恢复地点画面')
+assert.equal(narrationAfter.charImage, '')
+const brokenCloseUp = playtestVisuals({...speech,charImage:'',imageDisplay:'scene'})
+assert.equal(brokenCloseUp.bgImage, '/test.png', '特写加载失败仍保留地点背景')
+assert.equal(brokenCloseUp.missingCharacterImage, true, '不隐瞒真实缺图')
+const smallObject = playtestVisuals({...speech,speakerName:'照夜',charImage:'/sword.png',imageDisplay:'object'})
+assert.equal(smallObject.bgImage, '/test.png')
+assert.equal(smallObject.charImage, '/sword.png')
+assert.equal(smallObject.portraitDisplay, 'object')
+const ordinaryProp = playtestVisuals({...speech,isCharacterSpeaker:false,charImage:'/prop.png',imageDisplay:'scene'})
+assert.equal(ordinaryProp.bgImage, '/test.png', '非角色不会因显示设置而取得角色资格')
+assert.equal(ordinaryProp.charImage, '')
